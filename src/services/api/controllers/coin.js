@@ -16,7 +16,11 @@ const CoinController = {
       coin.price = price;
     }
 
-    return coin.filterKeys();
+    const filterdData = coin.filterKeys();
+
+    delete filterdData.id;
+
+    return filterdData;
   },
 
   async addCoin(coinData) {
