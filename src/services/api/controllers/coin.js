@@ -1,6 +1,6 @@
 const errors = require('../../../helpers/errors');
 const Models = require('../../../models/pg');
-const { differenceBetweenTwoDatesGreaterThanHour, getLiveCoinPrice } = require('../../../helpers/utils');
+const { differenceBetweenTwoDates, getLiveCoinPrice } = require('../../../helpers/utils');
 
 const CoinController = {
   async getCoinByCode(coinCode) {
