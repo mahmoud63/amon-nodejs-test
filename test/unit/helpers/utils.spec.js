@@ -510,8 +510,8 @@ describe('Helpers: Utils', () => {
   });
 
   it('Should check hours count between two dates greater than 1', () => {
-    const digits = Utils.differenceBetweenTwoDatesGreaterThanHour('2022-03-12 21:22:17.532+00');
-    expect(typeof digits).to.be.eq('boolean');
-    expect(digits.length).to.be.eq(false);
+    const flag = Utils.differenceBetweenTwoDatesGreaterThanHour('2022-03-12 21:22:17.532+00');
+    expect(typeof flag).to.be.eq('boolean');
+    expect(flag).to.be.eq(false);
   });
 });
