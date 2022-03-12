@@ -1,5 +1,4 @@
 const { v4: uuid } = require('uuid');
-const { pick } = require('lodash');
 
 module.exports = function (sequelize, DataTypes) {
   const Coin = sequelize.define(
@@ -40,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
     return Coin.findOne(Object.assign({ where: { code } }, tOpts));
   };
 
-  Coin.creadCoin = async function (code, name, tOpts = {}) {
+  Coin.creadCoin = async function (code, name) {
     const coin = await Coin.findByCoinCode(code);
 
     if (coin) {
