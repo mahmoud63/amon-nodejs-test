@@ -20,9 +20,7 @@ const CoinController = {
   },
 
   async addCoin(coinData) {
-    const price = await getLiveCoinPrice(coinData.coinName);
-
-    const coin = await Models.Coin.createCoin(coinData.coinCode, coinData.coinName, price);
+    const coin = await Models.Coin.createCoin(coinData.coinCode, coinData.coinName);
 
     errors.assertExposable(coin, 'existing_coin_code');
 

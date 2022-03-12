@@ -21,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       price: {
         type: DataTypes.DOUBLE,
-        allowNull: true,
+        default: 0,
       },
     },
     {
@@ -32,9 +32,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Coin.prototype.filterKeys = function () {
     const obj = this.toObject();
-
-    const filtered = pick(obj, 'id', 'name', 'code');
-
+    const filtered = pick(obj, 'id', 'name', 'code', 'price');
     return filtered;
   };
 
@@ -42,14 +40,14 @@ module.exports = function (sequelize, DataTypes) {
     return Coin.findOne(Object.assign({ where: { code } }, tOpts));
   };
 
-  Coin.createCoin = async function (code, name, price) {
+  Coin.createCoin = async function (code, name) {
     const coin = await Coin.findByCoinCode(code);
 
     if (coin) {
       return null;
     }
 
-    return Coin.create({ code: code, name: name, price: price });
+    return Coin.create({ code: code, name: name });
   };
 
   return Coin;
