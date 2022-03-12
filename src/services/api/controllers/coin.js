@@ -16,7 +16,7 @@ const CoinController = {
       await Models.Coin.update({ price: price }, { where: { id: coin.id } });
     }
 
-    return coin;
+    return coin.filterKeys();
   },
 
   async addCoin(coinData) {
