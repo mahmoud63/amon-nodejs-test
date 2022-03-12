@@ -52,6 +52,5 @@ module.exports = function (sequelize, DataTypes) {
     return Coin.create({ code: code, name: name, price: price });
   };
 
-  Coin.prototype;
   return Coin;
 };

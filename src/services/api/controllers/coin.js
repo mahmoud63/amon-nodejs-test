@@ -26,7 +26,7 @@ const CoinController = {
 
     errors.assertExposable(coin, 'existing_coin_code');
 
-    return coin;
+    return coin.filterKeys();
   },
 };
 
