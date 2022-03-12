@@ -12,15 +12,17 @@ const CoinController = {
 
     if (outdatedPrice || !coin.price) {
       const price = await getLiveCoinPrice(coin.name);
-      coin.price = price;
       await Models.Coin.update({ price: price }, { where: { id: coin.id } });
+      coin.price = price;
     }
 
-    return { ...coin.filterKeys(), price: coin.price };
+    return coin.filterKeys();
   },
 
   async addCoin(coinData) {
-    const coin = await Models.Coin.creadCoin(coinData.coinCode, coinData.coinName);
+    const price = await getLiveCoinPrice(coinData.coinName);
+
+    const coin = await Models.Coin.creadCoin(coinData.coinCode, coinData.coinName, price);
 
     errors.assertExposable(coin, 'existing_coin_code');
 
