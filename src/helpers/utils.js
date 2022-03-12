@@ -20,7 +20,7 @@ const Utils = {
 
     const hoursDiff = endTime.diff(startTime, 'hours');
 
-    return hoursDiff > 1;
+    return hoursDiff;
   },
 
   async getLiveCoinPrice(coinName) {

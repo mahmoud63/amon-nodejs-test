@@ -8,9 +8,9 @@ const CoinController = {
 
     errors.assertExposable(coin, 'unknown_coin_code');
 
-    const outdatedPrice = await differenceBetweenTwoDatesGreaterThanHour(coin.updatedAt);
+    const diff = await differenceBetweenTwoDates(coin.updatedAt);
 
-    if (outdatedPrice || !coin.price) {
+    if (diff >= 1 || !coin.price) {
       const price = await getLiveCoinPrice(coin.name);
       await Models.Coin.update({ price: price }, { where: { id: coin.id } });
       coin.price = price;
