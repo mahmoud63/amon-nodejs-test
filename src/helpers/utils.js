@@ -14,13 +14,13 @@ const Utils = {
     return new Promise((resolve) => setTimeout(resolve, ms));
   },
 
-  async differenceBetweenTwoDates(savedDate, currentDate = new Date()) {
+  async differenceBetweenTwoDatesGreaterThanHour(savedDate, currentDate = new Date()) {
     const startTime = moment(savedDate);
     const endTime = moment(currentDate);
 
     const hoursDiff = endTime.diff(startTime, 'hours');
 
-    return hoursDiff;
+    return hoursDiff > 1;
   },
 
   async getLiveCoinPrice(coinName) {

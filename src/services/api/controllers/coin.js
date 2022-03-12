@@ -1,6 +1,6 @@
 const errors = require('../../../helpers/errors');
 const Models = require('../../../models/pg');
-const { differenceBetweenTwoDates, getLiveCoinPrice } = require('../../../helpers/utils');
+const { differenceBetweenTwoDatesGreaterThanHour, getLiveCoinPrice } = require('../../../helpers/utils');
 
 const CoinController = {
   async getCoinByCode(coinCode) {
@@ -8,9 +8,9 @@ const CoinController = {
 
     errors.assertExposable(coin, 'unknown_coin_code');
 
-    const diff = await differenceBetweenTwoDates(coin.updatedAt);
+    const outdatedPrice = await differenceBetweenTwoDatesGreaterThanHour(coin.updatedAt);
 
-    if (diff >= 1 || !coin.price) {
+    if (outdatedPrice || !coin.price) {
       const price = await getLiveCoinPrice(coin.name);
       await Models.Coin.update({ price: price }, { where: { id: coin.id } });
       coin.price = price;
