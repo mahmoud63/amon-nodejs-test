@@ -14,7 +14,7 @@ const Utils = {
     return new Promise((resolve) => setTimeout(resolve, ms));
   },
 
-  async differenceBetweenTwoDatesGreaterThanHour(savedDate, currentDate = new Date()) {
+  async differenceBetweenTwoDates(savedDate, currentDate = new Date()) {
     const startTime = moment(savedDate);
     const endTime = moment(currentDate);
 
