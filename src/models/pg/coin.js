@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
   Coin.prototype.filterKeys = function () {
     const obj = this.toObject();
 
-    const filtered = pick(obj, 'name', 'code', 'price');
+    const filtered = pick(obj, 'id', 'name', 'code', 'price');
 
     return filtered;
   };
@@ -42,7 +42,7 @@ module.exports = function (sequelize, DataTypes) {
     return Coin.findOne(Object.assign({ where: { code } }, tOpts));
   };
 
-  Coin.creadCoin = async function (code, name, price) {
+  Coin.createCoin = async function (code, name, price) {
     const coin = await Coin.findByCoinCode(code);
 
     if (coin) {
