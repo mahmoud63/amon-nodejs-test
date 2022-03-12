@@ -53,7 +53,7 @@ function assertExposable(condition, ...args) {
 const ERRORS = [
   // API
   {
-    code: ' ',
+    code: 'unknown_error',
     status: 500,
     description: 'Unknown Error',
   },
