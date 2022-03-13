@@ -48,7 +48,7 @@ describe('Model:coin', () => {
   });
 
   it('Should not create', async () => {
-    const coin0 = await Models.Coin.createCoin('BCH2', 'Bitcoin two');
+    await Models.Coin.createCoin('BCH2', 'Bitcoin two');
 
     const coin = await Models.Coin.createCoin('BCH2', 'Bitcoin two');
 
