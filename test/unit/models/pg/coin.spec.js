@@ -28,6 +28,33 @@ describe('Model:coin', () => {
     expect(coin.code).to.eq('BCH');
   });
 
+  it('Should create with price', async () => {
+    const coin = await Models.Coin.create({
+      name: 'Bitcoin Cash known price',
+      code: 'BCHP',
+      price: 1000,
+    });
+
+    expect(coin.name).to.eq('Bitcoin Cash known price');
+    expect(coin.code).to.eq('BCHP');
+    expect(coin.price).to.eq(1000);
+  });
+
+  it('Should create if not exist', async () => {
+    const coin = await Models.Coin.createCoin('BCH2', 'Bitcoin two');
+
+    expect(coin.name).to.eq('Bitcoin two');
+    expect(coin.code).to.eq('BCH2');
+  });
+
+  it('Should not create', async () => {
+    const coin0 = await Models.Coin.createCoin('BCH2', 'Bitcoin two');
+
+    const coin = await Models.Coin.createCoin('BCH2', 'Bitcoin two');
+
+    expect(coin).to.eq(null);
+  });
+
   it('Should find by coinCode', async () => {
     const coinCode = this.coin.code;
     const coin = await Models.Coin.findByCoinCode(coinCode);

@@ -49,10 +49,6 @@ module.exports = {
         errors: error.details.map((detail) => detail.message),
       };
 
-      if (validationError.params.password) {
-        delete validationError.params.password;
-      }
-
       throwExposable('bad_params', null, null, {
         validationError,
       });

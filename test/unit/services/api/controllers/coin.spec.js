@@ -26,9 +26,36 @@ describe('Controller: Coin', () => {
       expect(Object.keys(coin).length).to.eq(3);
     });
 
+    it('should get coin by code from stored price', async () => {
+      const coinCode = 'ETH';
+      const coin = await CoinController.getCoinByCode(coinCode);
+
+      expect(coin.code).to.eq(coinCode);
+      expect(Object.keys(coin).length).to.eq(3);
+    });
+
     it('should fail get coin by code', async () => {
       const coinCode = 'AMN';
       expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'unknown_coin_code');
+    });
+  });
+
+  describe('addCoin', () => {
+    it('should add coin', async () => {
+      const coinData = { coinName: 'bitcoin', coinCode: 'BTC00' };
+
+      const coin = await CoinController.addCoin(coinData);
+
+      expect(coin.code).to.eq(coinData.coinCode);
+      expect(coin.name).to.eq(coinData.coinName);
+
+      expect(Object.keys(coin).length).to.eq(3);
+    });
+
+    it('should fail add coin', async () => {
+      const coinData = { coinName: 'bitcoin', coinCode: 'BTC' };
+
+      expect(CoinController.addCoin(coinData)).to.be.rejectedWith(Error, 'existing_coin_code');
     });
   });
 });

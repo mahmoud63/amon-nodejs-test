@@ -5,12 +5,12 @@ const { validateParams, validateBody } = require('../../../helpers/validation');
 
 const CoinRouter = {
   schemaGetByCoinCode: Joi.object({
-    coinCode: Joi.string().min(3).uppercase().max(5),
+    coinCode: Joi.string().min(3).max(9),
   }),
 
   schemaAddCoin: Joi.object({
     coinName: Joi.string().min(1),
-    coinCode: Joi.string().min(3).uppercase().max(5),
+    coinCode: Joi.string().min(3).max(9),
   }),
 
   async getCoinByCode(ctx) {

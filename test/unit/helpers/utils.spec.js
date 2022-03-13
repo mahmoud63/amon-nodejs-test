@@ -511,6 +511,16 @@ describe('Helpers: Utils', () => {
 
   it('Should check hours count between two dates greater than 1', () => {
     const flag = Utils.differenceBetweenTwoDatesGreaterThanHour('2022-03-12 21:22:17.532+00');
-    expect(flag).to.eq(false);
+    expect(flag).to.eq(true);
+  });
+
+  it('Should return greater than 0 if api return  data', async () => {
+    const price = await Utils.getLiveCoinPrice('bitcoin');
+    expect(price).to.greaterThan(0);
+  });
+
+  it('Should return 0 if api return no data', async () => {
+    const price = await Utils.getLiveCoinPrice('notExistingCoin');
+    expect(price).to.eq(0);
   });
 });

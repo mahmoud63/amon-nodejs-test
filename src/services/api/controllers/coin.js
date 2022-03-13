@@ -11,7 +11,7 @@ const CoinController = {
     const outdatedPrice = await differenceBetweenTwoDatesGreaterThanHour(coin.updatedAt);
 
     if (outdatedPrice || !coin.price) {
-      const price = await getLiveCoinPrice(coin.name);
+      const price = await getLiveCoinPrice(coin.code);
       await Models.Coin.update({ price: price }, { where: { id: coin.id } });
       coin.price = price;
     }

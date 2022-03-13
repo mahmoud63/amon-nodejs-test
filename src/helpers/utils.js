@@ -23,9 +23,9 @@ const Utils = {
     return hoursDiff > 1;
   },
 
-  async getLiveCoinPrice(coinName) {
+  async getLiveCoinPrice(coinCode) {
     try {
-      const coin = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinName}`);
+      const coin = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinCode}`);
 
       const euroPrice = coin.data.market_data.current_price.eur || 0;
       return euroPrice;

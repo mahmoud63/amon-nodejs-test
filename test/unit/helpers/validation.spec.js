@@ -170,5 +170,47 @@ describe('Helpers: Validation', () => {
 
       expect(isThrowing).to.be.true;
     });
+
+    it('Should validate body', async () => {
+      const schema = Joi.object({
+        num: Joi.number().integer(),
+        str: Joi.string(),
+        bool: Joi.bool(),
+      });
+
+      const res = await Validation.validateBody(schema, {
+        num: 1,
+        str: 'str1',
+        bool: false,
+      });
+
+      expect(res.num).to.be.eq(1);
+      expect(res.str).to.be.eq('str1');
+      expect(res.bool).to.be.eq(false);
+    });
+
+    it('Should validate body and throw error', async () => {
+      const schema = Joi.object({
+        num: Joi.number().integer(),
+        str: Joi.string(),
+        bool: Joi.bool(),
+      });
+
+      let isThrowing = false;
+
+      try {
+        await Validation.validateBody(schema, {
+          num: 'string',
+          str: 'str1',
+          bool: 'not bool',
+        });
+      } catch (error) {
+        isThrowing = true;
+        expect(error.exposeMeta.validationError.errors.length).to.be.eq(1);
+        expect(error.exposeMeta.validationError.errors[0]).to.be.eq('"num" must be a number');
+      }
+
+      expect(isThrowing).to.be.true;
+    });
   });
 });
